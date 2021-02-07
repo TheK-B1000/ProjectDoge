@@ -6,6 +6,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody dogeBody;
+    [SerializeField] float ThurstSpeed = 100.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,7 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            dogeBody.AddRelativeForce(Vector3.up);
+            dogeBody.AddRelativeForce(Vector3.up * ThurstSpeed * Time.deltaTime);
             Debug.Log("Pressed SPACE");
         }    
     }
