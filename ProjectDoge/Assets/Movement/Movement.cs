@@ -6,7 +6,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody dogeBody;
-    [SerializeField] float ThurstSpeed = 100.0f;
+    [SerializeField] float thurstSpeed = 100.0f;
+    [SerializeField] float rotationThrust = 100.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,20 +26,24 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log("Pressed D - Rotate Right");
+            Rotate(rotationThrust);
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            Debug.Log("Pressed A - Rotate Left");
+            Rotate(-rotationThrust);
         }
+    }
+
+    private void Rotate(float rotationThisFrame)
+    {
+        transform.Rotate(Vector3.forward * rotationThrust * Time.deltaTime);
     }
 
     void ProcessThrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            dogeBody.AddRelativeForce(Vector3.up * ThurstSpeed * Time.deltaTime);
-            Debug.Log("Pressed SPACE");
+            dogeBody.AddRelativeForce(Vector3.up * thurstSpeed * Time.deltaTime);
         }    
     }
 
