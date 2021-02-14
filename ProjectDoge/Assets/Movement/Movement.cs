@@ -24,11 +24,11 @@ public class Movement : MonoBehaviour
 
     void ProcessRotation()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             Rotate(rotationThrust);
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             Rotate(-rotationThrust);
         }
@@ -36,7 +36,9 @@ public class Movement : MonoBehaviour
 
     private void Rotate(float rotationThisFrame)
     {
-        transform.Rotate(Vector3.forward * rotationThrust * Time.deltaTime);
+        dogeBody.freezeRotation = true; // freezing rotation so we can manually rotate
+        transform.Rotate(Vector3.right* rotationThisFrame * Time.deltaTime);
+        dogeBody.freezeRotation = false; // unfreeze
     }
 
     void ProcessThrust()
